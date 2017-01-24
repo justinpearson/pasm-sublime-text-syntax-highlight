@@ -1,6 +1,6 @@
 This file tells Sublime Text 3 how to syntax-highlight `pasm` code used by the Beaglebone Black's Programmable Real-time Unit (PRU).
 
-![Images/pasm-syntax-highlight.png]()
+![pasm code correctly syntax-highlighted in Sublime Text 3](Images/pasm-syntax-highlight.png)
 
 1. Put the file `pasm.sublime-syntax` in the place where Sublime Text looks for syntax definitions:
 
