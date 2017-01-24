@@ -1,0 +1,79 @@
+%YAML 1.2
+---
+name: pasm
+file_extensions: p
+scope: source.pasm
+
+# This file lives at
+# https://github.com/justinpearson/pasm-sublime-text-syntax-highlight
+
+# Put this file in eg:
+# (Mac) /Users/justin/Library/Application Support/Sublime Text 3/Packages/User/pasm.sublime-syntax
+# (Can use Sublime Text > Preferences > Browse Packages to open the correct directory)
+
+# Useful list of scopes:
+# https://www.sublimetext.com/docs/3/scope_naming.html
+
+# This was not very helpful:
+# https://www.sublimetext.com/docs/3/syntax.html
+
+# Tip: Move cursor to highlighted word + cmd-opt-p : see what contexts are active at the cursor 
+  # Useful for finding the name of a scope, eg "keyword.control.import.include"
+
+contexts:
+  main:
+
+    # Assembly instructions
+    # Source: http://processors.wiki.ti.com/index.php/PRU_Assembly_Instructions
+    - match: \b(ADD|ADC|SUB|SUC|RSB|RSC|LSL|LSR|AND|OR|XOR|NOT|MIN|MAX|CLR|SET|SCAN|LMBD|MOV|LDI|MVIB|MVIW|MVID|LBBO|SBBO|LBCO|SBCO|LFC|STC|ZERO|JMP|JAL|CALL|RET|QBGT|QBGE|QBLT|QBLE|QBEQ|QBNE|QBA|QBBS|QBBC|WBS|WBC|HALT|SLP|LOOP|add|adc|sub|suc|rsb|rsc|lsl|lsr|and|or|xor|not|min|max|clr|set|scan|lmbd|mov|ldi|mvib|mviw|mvid|lbbo|sbbo|lbco|sbco|lfc|stc|zero|jmp|jal|call|ret|qbgt|qbge|qblt|qble|qbeq|qbne|qba|qbbs|qbbc|wbs|wbc|halt|slp|loop)\b  
+      scope: entity.name.function
+
+    # Dot commands
+    # Source: http://processors.wiki.ti.com/index.php/PRU_Assembly_Reference_Guide#Set_Call.2FReturn_Register_.28.setcallreg.29_Command
+    # why no work?:
+    # - match: \b((\.origin)|(\.entrypoint)|(\.setcallreg)|(\.macro)|(\.mparam)|(\.endm)|(\.struct)|(\.ends)|(\.u8)|(\.u16)|(\.u32)|(\.assign)|(\.enter)|(\.leave)|(\.using))\b
+    # - match: \b(\.origin|\.entrypoint|\.setcallreg|\.macro|\.mparam|\.endm|\.struct|\.ends|\.u8|\.u16|\.u32|\.assign|\.enter|\.leave|\.using)\b
+    - match: \b(origin|entrypoint|setcallreg|macro|mparam|endm|struct|ends|u8|u16|u32|assign|enter|leave|using)\b
+      scope: entity.name.function
+
+    # Preprocessor directives
+    # Source: http://processors.wiki.ti.com/index.php/PRU_Assembly_Reference_Guide#Set_Call.2FReturn_Register_.28.setcallreg.29_Command
+    - match: (#include|#define|#undef|#error|#ifdef|#ifndef|#endif|#else)
+      scope: keyword.control.import.include
+
+    # Comments
+    - match: //.*$
+      scope: comment
+
+    # Numbers: 123
+    - match: \b[0-9]+\b
+      scope: constant.numeric
+
+    # Hex numbers: 0xC, 0xff
+    - match: \b(0x[0-9A-Fa-f]+)\b
+      scope: constant.numeric
+
+    # Binary numbers: 0b11011000
+    - match: \b(0b[01]+)\b
+      scope: constant.numeric
+
+    # Labels: "INIT_ADC:"
+    - match: ([0-9a-zA-Z_]+)(:)
+      scope: keyword.control
+
+    # Registers: R3
+    - match: ([rR]\d\d?)
+      scope: storage
+
+    # Constant registers: C12
+    - match: ([cC]\d\d?)
+      scope: storage.type
+
+    # Bits & words: R3.t15, C12.w3
+    - match: \.[tw]\d\d?
+      scope: storage.type
+
+    # Strings: "hello world"
+    - match: \".*\"
+      scope: string
+
