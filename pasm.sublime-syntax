@@ -29,15 +29,12 @@ contexts:
       scope: entity.name.function
 
     # Dot commands
-    # Source: http://processors.wiki.ti.com/index.php/PRU_Assembly_Reference_Guide#Set_Call.2FReturn_Register_.28.setcallreg.29_Command
-    # why no work?:
-    # - match: \b((\.origin)|(\.entrypoint)|(\.setcallreg)|(\.macro)|(\.mparam)|(\.endm)|(\.struct)|(\.ends)|(\.u8)|(\.u16)|(\.u32)|(\.assign)|(\.enter)|(\.leave)|(\.using))\b
-    # - match: \b(\.origin|\.entrypoint|\.setcallreg|\.macro|\.mparam|\.endm|\.struct|\.ends|\.u8|\.u16|\.u32|\.assign|\.enter|\.leave|\.using)\b
-    - match: \b(origin|entrypoint|setcallreg|macro|mparam|endm|struct|ends|u8|u16|u32|assign|enter|leave|using)\b
+    # Source: http://processors.wiki.ti.com/index.php/PRU_Assembly_Reference_Guide
+    - match: \.origin|\.entrypoint|\.setcallreg|\.macro|\.mparam|\.endm|\.struct|\.ends|\.u8|\.u16|\.u32|\.assign|\.enter|\.leave|\.using
       scope: entity.name.function
 
     # Preprocessor directives
-    # Source: http://processors.wiki.ti.com/index.php/PRU_Assembly_Reference_Guide#Set_Call.2FReturn_Register_.28.setcallreg.29_Command
+    # Source: http://processors.wiki.ti.com/index.php/PRU_Assembly_Reference_Guide
     - match: (#include|#define|#undef|#error|#ifdef|#ifndef|#endif|#else)
       scope: keyword.control.import.include
 
